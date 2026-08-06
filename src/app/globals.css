@@ -1,26 +1,34 @@
 @import 'tailwindcss';
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --color-leaf-50: #f2f9f1;
+  --color-leaf-100: #e0f0dd;
+  --color-leaf-300: #9dcd94;
+  --color-leaf-500: #4a9d3f;
+  --color-leaf-600: #3a7d32;
+  --color-leaf-700: #2d6127;
+
+  --color-char-50: #f7f7f6;
+  --color-char-200: #e3e3e0;
+  --color-char-500: #6f6f68;
+  --color-char-800: #2a2a26;
+  --color-char-900: #1a1a17;
+
+  --color-amber-cta: #e8873a;
+
+  --font-sans:
+    'IBM Plex Sans Thai', ui-sans-serif, system-ui, -apple-system, 'Helvetica Neue', sans-serif;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
+html,
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-char-50);
+  color: var(--color-char-900);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Touch targets stay comfortable for one-handed use at the gate. */
+button,
+a[role='button'] {
+  min-height: 44px;
 }
