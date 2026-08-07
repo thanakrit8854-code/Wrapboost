@@ -1,14 +1,18 @@
 'use client';
 
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useMemo, useState } from 'react';
 
 import { OptionGroupPicker } from '@/components/menu/OptionGroupPicker';
+import { useCart } from '@/lib/cartStore';
 import { formatTHBPlain } from '@/lib/money';
 import { priceSelection, validateSelection, type Selection } from '@/lib/pricing';
 import type { MenuProduct } from '@/types/menu';
 
 export function BuildClient({ product, storeSlug }: { product: MenuProduct; storeSlug: string }) {
+  const router = useRouter();
+  const addLine = useCart((s) => s.addLine);
   const [selection, setSelection] = useState<Selection>({});
 
   const priced = useMemo(() => priceSelection(product, selection), [product, selection]);
@@ -27,14 +31,32 @@ export function BuildClient({ product, storeSlug }: { product: MenuProduct; stor
       if (group.select_type === 'SINGLE') {
         return { ...prev, [groupId]: current.includes(optionId) ? [] : [optionId] };
       }
-
       if (current.includes(optionId)) {
         return { ...prev, [groupId]: current.filter((id) => id !== optionId) };
       }
-
       if (current.length >= group.max_select) return prev;
       return { ...prev, [groupId]: [...current, optionId] };
     });
+  }
+
+  function handleAdd() {
+    if (!valid) return;
+
+    addLine(
+      {
+        productId: product.id,
+        productName: product.name_th,
+        optionIds: priced.chosen.map((o) => o.id),
+        optionNames: priced.chosen.map((o) => o.name_th),
+        qty: 1,
+        previewPrice: priced.price,
+        previewKcal: priced.kcal,
+        previewProtein: priced.protein,
+      },
+      storeSlug,
+    );
+
+    router.push(`/cart?store=${storeSlug}`);
   }
 
   return (
@@ -80,6 +102,7 @@ export function BuildClient({ product, storeSlug }: { product: MenuProduct; stor
           <button
             type="button"
             disabled={!valid}
+            onClick={handleAdd}
             className="bg-leaf-600 active:bg-leaf-700 disabled:bg-char-200 disabled:text-char-500 w-full rounded-xl px-6 py-4 text-base font-semibold text-white transition-colors"
           >
             {valid ? 'เพิ่มลงตะกร้า' : `ยังต้องเลือก: ${missing.join(', ')}`}
