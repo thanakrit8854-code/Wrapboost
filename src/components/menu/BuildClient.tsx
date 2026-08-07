@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { useMemo, useState } from 'react';
 
 import { OptionGroupPicker } from '@/components/menu/OptionGroupPicker';
+import { AnimatedNumber } from '@/components/ui/AnimatedNumber';
 import { useCart } from '@/lib/cartStore';
 import { formatTHBPlain } from '@/lib/money';
 import { priceSelection, validateSelection, type Selection } from '@/lib/pricing';
@@ -89,14 +90,19 @@ export function BuildClient({ product, storeSlug }: { product: MenuProduct; stor
         <div className="mx-auto max-w-md px-4 py-4">
           <div className="mb-3 flex items-center justify-between">
             <div className="flex gap-2">
-              <span className="bg-leaf-50 text-leaf-700 rounded-full px-2.5 py-1 text-xs font-semibold">
-                โปรตีน {priced.protein} g
+              <span
+                key={`p-${priced.protein}`}
+                className="bg-leaf-50 text-leaf-700 wb-flash rounded-full px-2.5 py-1 text-xs font-semibold"
+              >
+                โปรตีน <AnimatedNumber value={priced.protein} decimals={1} /> g
               </span>
               <span className="bg-char-50 text-char-500 rounded-full px-2.5 py-1 text-xs font-semibold">
-                {priced.kcal} kcal
+                <AnimatedNumber value={priced.kcal} /> kcal
               </span>
             </div>
-            <p className="text-char-900 text-2xl font-bold">฿{formatTHBPlain(priced.price)}</p>
+            <p key={priced.price} className="text-char-900 wb-roll text-2xl font-bold">
+              ฿<AnimatedNumber value={priced.price / 100} />
+            </p>
           </div>
 
           <button

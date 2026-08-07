@@ -37,8 +37,13 @@ export default async function MenuPage({
           <section key={category.id}>
             <h2 className="text-char-900 mb-3 text-lg font-bold">{category.name_th}</h2>
             <div className="space-y-3">
-              {category.products.map((product) => (
-                <ProductCard key={product.id} product={product} storeSlug={storeSlug} />
+              {category.products.map((product, index) => (
+                <ProductCard
+                  key={product.id}
+                  product={product}
+                  storeSlug={storeSlug}
+                  index={index}
+                />
               ))}
             </div>
           </section>

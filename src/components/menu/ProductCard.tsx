@@ -3,13 +3,22 @@ import Link from 'next/link';
 import { formatTHBPlain } from '@/lib/money';
 import type { MenuProduct } from '@/types/menu';
 
-export function ProductCard({ product, storeSlug }: { product: MenuProduct; storeSlug: string }) {
+export function ProductCard({
+  product,
+  storeSlug,
+  index = 0,
+}: {
+  product: MenuProduct;
+  storeSlug: string;
+  index?: number;
+}) {
   const optionCount = product.option_groups.reduce((sum, g) => sum + g.options.length, 0);
 
   return (
     <Link
       href={`/build/${product.id}?store=${storeSlug}`}
-      className="border-char-200 active:border-leaf-500 block rounded-2xl border bg-white p-4 transition-colors"
+      style={{ animationDelay: `${index * 70}ms` }}
+      className="border-char-200 active:border-leaf-500 wb-rise block rounded-2xl border bg-white p-4 transition-all active:scale-[0.985]"
     >
       <div className="flex items-start justify-between gap-4">
         <div className="min-w-0 flex-1">
