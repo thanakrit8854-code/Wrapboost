@@ -1,10 +1,10 @@
 import { createClient } from '@/lib/supabase/server';
 import type { MenuCategory, MenuOptionGroup, MenuProduct, StoreMenu } from '@/types/menu';
 
-/**
- * Loads the full public menu for a store.
- * Uses the publishable key, so RLS applies: only public menu tables are readable.
- */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+// Supabase's nested select returns a shape TypeScript cannot infer, so the raw
+// rows are treated as `any` here and narrowed into our own types below.
+
 export async function getStoreMenu(slug: string): Promise<StoreMenu | null> {
   const supabase = await createClient();
 
@@ -42,13 +42,13 @@ export async function getStoreMenu(slug: string): Promise<StoreMenu | null> {
 
   if (error || !rows) return null;
 
-  const categories: MenuCategory[] = rows.map((c) => ({
+  const categories: MenuCategory[] = (rows as any[]).map((c) => ({
     id: c.id,
     name_th: c.name_th,
     name_en: c.name_en,
     sort_order: c.sort_order,
     products: (c.products ?? [])
-      .map((p): MenuProduct => ({
+      .map((p: any): MenuProduct => ({
         id: p.id,
         type: p.type,
         name_th: p.name_th,
@@ -61,7 +61,7 @@ export async function getStoreMenu(slug: string): Promise<StoreMenu | null> {
         is_available: p.is_available,
         sort_order: p.sort_order,
         option_groups: (p.product_option_groups ?? [])
-          .map((link): MenuOptionGroup | null => {
+          .map((link: any): MenuOptionGroup | null => {
             const g = link.option_groups;
             if (!g) return null;
             return {
@@ -74,7 +74,7 @@ export async function getStoreMenu(slug: string): Promise<StoreMenu | null> {
               is_required: link.is_required,
               sort_order: link.sort_order,
               options: (g.options ?? [])
-                .map((o) => ({
+                .map((o: any) => ({
                   id: o.id,
                   name_th: o.name_th,
                   name_en: o.name_en,
@@ -85,13 +85,16 @@ export async function getStoreMenu(slug: string): Promise<StoreMenu | null> {
                   is_available: o.is_available,
                   sort_order: o.sort_order,
                 }))
-                .sort((a, b) => a.sort_order - b.sort_order),
+                .sort(
+                  (a: MenuOptionGroup['options'][number], b: MenuOptionGroup['options'][number]) =>
+                    a.sort_order - b.sort_order,
+                ),
             };
           })
-          .filter((g): g is MenuOptionGroup => g !== null)
-          .sort((a, b) => a.sort_order - b.sort_order),
+          .filter((g: MenuOptionGroup | null): g is MenuOptionGroup => g !== null)
+          .sort((a: MenuOptionGroup, b: MenuOptionGroup) => a.sort_order - b.sort_order),
       }))
-      .sort((a, b) => a.sort_order - b.sort_order),
+      .sort((a: MenuProduct, b: MenuProduct) => a.sort_order - b.sort_order),
   }));
 
   return { store, categories };

@@ -71,7 +71,6 @@ export async function createOrder(input: CreateOrderInput): Promise<CreateOrderR
   }
 
   async function releaseSlot() {
-    await db.rpc('noop').catch(() => undefined);
     await db
       .from('pickup_slots')
       .update({ reserved_count: slot!.reserved_count })
