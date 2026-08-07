@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
 import { StatusBadge } from '@/components/order/StatusBadge';
@@ -100,10 +101,25 @@ export default async function OrderPage({
         </div>
       </section>
 
-      <p className="text-char-500 mt-8 px-6 text-center text-sm leading-relaxed">
-        แสดงรหัส <strong className="text-char-900">{order.orderCode}</strong>{' '}
-        ที่เคาน์เตอร์เพื่อรับสินค้า
-      </p>
+      {order.status === 'COLLECTED' ? (
+        <section className="mt-8 px-4">
+          <Link
+            href="/s/cei-domestic"
+            role="button"
+            className="bg-leaf-600 active:bg-leaf-700 wb-lift flex w-full items-center justify-center rounded-xl px-6 py-4 text-base font-semibold text-white transition-colors"
+          >
+            สั่งอีกครั้ง
+          </Link>
+          <p className="text-char-500 mt-4 text-center text-sm">
+            ขอบคุณที่อุดหนุน แล้วพบกันเที่ยวบินหน้า
+          </p>
+        </section>
+      ) : (
+        <p className="text-char-500 mt-8 px-6 text-center text-sm leading-relaxed">
+          แสดงรหัส <strong className="text-char-900">{order.orderCode}</strong>{' '}
+          ที่เคาน์เตอร์เพื่อรับสินค้า
+        </p>
+      )}
     </main>
   );
 }
