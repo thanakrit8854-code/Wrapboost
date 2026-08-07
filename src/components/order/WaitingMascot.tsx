@@ -1,6 +1,6 @@
 'use client';
 
-type Mood = 'waiting' | 'queued' | 'cooking' | 'ready';
+type Mood = 'waiting' | 'queued' | 'cooking' | 'ready' | 'collected';
 
 const MOOD_BY_STATUS: Record<string, Mood> = {
   PENDING_PAYMENT: 'waiting',
@@ -8,6 +8,7 @@ const MOOD_BY_STATUS: Record<string, Mood> = {
   QUEUED: 'queued',
   PREPARING: 'cooking',
   READY: 'ready',
+  COLLECTED: 'collected',
 };
 
 const CAPTION: Record<Mood, string> = {
@@ -15,6 +16,7 @@ const CAPTION: Record<Mood, string> = {
   queued: 'ได้รับออร์เดอร์แล้ว รอคิวแป๊บนึง',
   cooking: 'กำลังม้วนแรปให้อยู่',
   ready: 'เสร็จแล้ว มารับได้เลย',
+  collected: 'ขอบคุณที่อุดหนุน เดินทางปลอดภัยนะ',
 };
 
 /**
@@ -34,7 +36,13 @@ export function WaitingMascot({ status }: { status: string }) {
           cy="158"
           rx="40"
           ry="7"
-          className={`fill-char-200 ${mood === 'ready' ? 'mascot-shadow-hop' : 'mascot-shadow'}`}
+          className={`fill-char-200 ${
+            mood === 'ready'
+              ? 'mascot-shadow-hop'
+              : mood === 'collected'
+                ? 'mascot-shadow-bow'
+                : 'mascot-shadow'
+          }`}
           opacity="0.5"
         />
 
@@ -62,6 +70,25 @@ export function WaitingMascot({ status }: { status: string }) {
               strokeLinecap="round"
               fill="none"
               style={{ animationDelay: '0.8s' }}
+            />
+          </g>
+        )}
+
+        {mood === 'collected' && (
+          <g className="mascot-heart">
+            <path
+              d="M60 60c0-5 7-6 8-1 1-5 8-4 8 1 0 6-8 11-8 11s-8-5-8-11z"
+              className="fill-red-300"
+            />
+            <path
+              d="M132 52c0-4 5.5-4.8 6.4-0.8 0.8-4 6.4-3.2 6.4 0.8 0 4.8-6.4 8.8-6.4 8.8s-6.4-4-6.4-8.8z"
+              className="fill-leaf-300"
+              style={{ animationDelay: '0.9s' }}
+            />
+            <path
+              d="M100 34c0-3.5 4.8-4.2 5.6-0.7 0.7-3.5 5.6-2.8 5.6 0.7 0 4.2-5.6 7.7-5.6 7.7s-5.6-3.5-5.6-7.7z"
+              className="fill-red-300"
+              style={{ animationDelay: '1.7s' }}
             />
           </g>
         )}
@@ -107,7 +134,15 @@ export function WaitingMascot({ status }: { status: string }) {
           <g className="mascot-face">
             <ellipse cx="86" cy="90" rx="4" ry="5" className="fill-char-900 mascot-blink" />
             <ellipse cx="114" cy="90" rx="4" ry="5" className="fill-char-900 mascot-blink" />
-            {mood === 'ready' ? (
+            {mood === 'collected' ? (
+              <path
+                d="M86 106q14 14 28 0"
+                className="stroke-char-900"
+                strokeWidth="3.5"
+                strokeLinecap="round"
+                fill="none"
+              />
+            ) : mood === 'ready' ? (
               <path
                 d="M88 104q12 12 24 0"
                 className="stroke-char-900"

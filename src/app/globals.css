@@ -553,3 +553,80 @@ a[role='button'] {
     opacity: 0.6;
   }
 }
+
+/* ── Mascot: the goodbye ─────────────────────────────────
+   Plays once when the order is collected, then rests upright.
+   A bow that repeats would feel needy; one is enough. */
+
+@keyframes mascot-bow {
+  0% {
+    transform: translateY(0) rotate(0deg);
+  }
+  22% {
+    transform: translateY(4px) rotate(-14deg);
+  }
+  48% {
+    transform: translateY(6px) rotate(-17deg);
+  }
+  74% {
+    transform: translateY(0) rotate(2deg);
+  }
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+}
+
+@keyframes mascot-heart {
+  0% {
+    opacity: 0;
+    transform: translateY(6px) scale(0.4);
+  }
+  25% {
+    opacity: 1;
+    transform: translateY(-6px) scale(1.1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-34px) scale(0.85);
+  }
+}
+
+@keyframes mascot-shadow-bow {
+  0% {
+    transform: scaleX(1);
+    opacity: 0.5;
+  }
+  48% {
+    transform: scaleX(1.08);
+    opacity: 0.58;
+  }
+  100% {
+    transform: scaleX(1);
+    opacity: 0.5;
+  }
+}
+
+.mascot-collected {
+  transform-origin: 100px 150px;
+  animation: mascot-bow 1.9s cubic-bezier(0.34, 1.4, 0.5, 1) 0.25s both;
+}
+
+.mascot-heart path {
+  animation: mascot-heart 2.8s ease-out infinite;
+}
+
+.mascot-shadow-bow {
+  transform-origin: 100px 158px;
+  animation: mascot-shadow-bow 1.9s cubic-bezier(0.34, 1.4, 0.5, 1) 0.25s both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mascot-collected,
+  .mascot-shadow-bow {
+    animation: none;
+  }
+  .mascot-heart path {
+    animation: none;
+    opacity: 0.7;
+  }
+}
