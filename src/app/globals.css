@@ -731,3 +731,28 @@ a[role='button'] {
     transform: translate(180px, 50px) rotate(-6deg);
   }
 }
+
+/* Ingredients drop into the wrap rather than appearing. */
+@keyframes wb-layer-in {
+  0% {
+    opacity: 0;
+    transform: translateY(-14px) scale(0.85);
+  }
+  60% {
+    transform: translateY(2px) scale(1.04);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.wb-layer-in {
+  animation: wb-layer-in 0.45s cubic-bezier(0.34, 1.4, 0.5, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wb-layer-in {
+    animation: none;
+  }
+}

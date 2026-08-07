@@ -1,5 +1,6 @@
 'use client';
 
+import { WrapBuilderArt } from '@/components/art/WrapBuilderArt';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useMemo, useState } from 'react';
@@ -17,6 +18,27 @@ export function BuildClient({ product, storeSlug }: { product: MenuProduct; stor
   const [selection, setSelection] = useState<Selection>({});
 
   const priced = useMemo(() => priceSelection(product, selection), [product, selection]);
+  const layers = useMemo(() => {
+    const names = priced.chosen.map((o) => o.name_th);
+    return {
+      base: names.find((n) => n.includes('แป้ง')) ?? null,
+      protein:
+        names.find((n) => n.includes('ไก่') || n.includes('ทูน่า') || n.includes('เต้าหู้')) ??
+        null,
+      veggies: names.filter((n) =>
+        ['ผักกาด', 'มะเขือเทศ', 'แตงกวา', 'หอมแดง', 'แครอท'].some((v) => n.includes(v)),
+      ),
+      sauce:
+        names.find(
+          (n) =>
+            n.includes('ซอส') ||
+            n.includes('โยเกิร์ต') ||
+            n.includes('งา') ||
+            n.includes('พริกไทย'),
+        ) ?? null,
+    };
+  }, [priced.chosen]);
+
   const { valid, missing } = useMemo(
     () => validateSelection(product, selection),
     [product, selection],
@@ -74,6 +96,12 @@ export function BuildClient({ product, storeSlug }: { product: MenuProduct; stor
           <h1 className="text-char-900 truncate font-semibold">{product.name_th}</h1>
         </div>
       </header>
+
+      <section className="flex justify-center pt-6">
+        <div className="bg-sand-100 flex h-40 w-40 items-center justify-center rounded-3xl">
+          <WrapBuilderArt layers={layers} />
+        </div>
+      </section>
 
       <div className="space-y-8 px-4 pt-6">
         {product.option_groups.map((group) => (
