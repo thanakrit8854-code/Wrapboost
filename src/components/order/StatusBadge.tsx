@@ -1,7 +1,12 @@
-const CONFIG: Record
-  string,
-  { text: string; tone: string; motion: 'breathe' | 'sizzle' | 'land' | 'none' }
-> = {
+type Motion = 'breathe' | 'sizzle' | 'land' | 'none';
+
+interface StatusConfig {
+  text: string;
+  tone: string;
+  motion: Motion;
+}
+
+const CONFIG: Record<string, StatusConfig> = {
   PENDING_PAYMENT: { text: 'รอชำระเงิน', tone: 'bg-amber-50 text-amber-800', motion: 'breathe' },
   PAID: { text: 'ชำระแล้ว รอคิว', tone: 'bg-leaf-50 text-leaf-700', motion: 'breathe' },
   QUEUED: { text: 'อยู่ในคิว', tone: 'bg-leaf-50 text-leaf-700', motion: 'breathe' },
@@ -28,21 +33,21 @@ function Dots() {
 }
 
 export function StatusBadge({ status }: { status: string }) {
-  const config = CONFIG[status] ?? {
+  const config: StatusConfig = CONFIG[status] ?? {
     text: status,
     tone: 'bg-char-200 text-char-800',
-    motion: 'none' as const,
+    motion: 'none',
   };
 
   if (config.motion === 'sizzle') {
     return (
       <div className="relative inline-block">
         <span
-          className={`wb-land relative z-10 inline-flex items-center gap-2.5 rounded-full px-5 py-2 text-sm font-semibold shadow-sm ${config.tone}`}
+          className={`wb-land relative z-10 inline-flex items-center gap-2.5 overflow-hidden rounded-full px-5 py-2 text-sm font-semibold shadow-sm ${config.tone}`}
         >
           <Dots />
           {config.text}
-          <span className="pointer-events-none absolute inset-0 overflow-hidden rounded-full">
+          <span className="pointer-events-none absolute inset-0">
             <span className="wb-sweep block h-full w-1/3 bg-gradient-to-r from-transparent via-white/70 to-transparent" />
           </span>
         </span>
