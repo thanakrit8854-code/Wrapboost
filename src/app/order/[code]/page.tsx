@@ -1,5 +1,7 @@
 import { notFound } from 'next/navigation';
 
+import { StatusWatcher } from '@/components/order/StatusWatcher';
+
 import { formatTHBPlain } from '@/lib/money';
 import { getOrderByCode } from '@/server/services/orderLookup';
 
@@ -44,6 +46,7 @@ export default async function OrderPage({
 
   return (
     <main className="mx-auto min-h-dvh max-w-md pb-12">
+      <StatusWatcher code={code} token={token} currentStatus={order.status} />
       <header className="bg-leaf-700 px-6 pt-14 pb-12 text-center text-white">
         <p className="text-leaf-100 text-xs tracking-[0.2em] uppercase">รหัสรับสินค้า</p>
         <p className="mt-2 text-5xl font-bold tracking-wider">{order.orderCode}</p>
