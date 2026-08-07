@@ -1,20 +1,10 @@
 import { notFound } from 'next/navigation';
 
+import { StatusBadge } from '@/components/order/StatusBadge';
 import { StatusWatcher } from '@/components/order/StatusWatcher';
 
 import { formatTHBPlain } from '@/lib/money';
 import { getOrderByCode } from '@/server/services/orderLookup';
-
-const STATUS_LABEL: Record<string, { text: string; tone: string }> = {
-  PENDING_PAYMENT: { text: 'รอชำระเงิน', tone: 'bg-amber-50 text-amber-700' },
-  PAID: { text: 'ชำระแล้ว รอคิว', tone: 'bg-leaf-50 text-leaf-700' },
-  QUEUED: { text: 'อยู่ในคิว', tone: 'bg-leaf-50 text-leaf-700' },
-  PREPARING: { text: 'กำลังทำ', tone: 'bg-leaf-50 text-leaf-700' },
-  READY: { text: 'พร้อมรับแล้ว', tone: 'bg-leaf-500 text-white' },
-  COLLECTED: { text: 'รับแล้ว', tone: 'bg-char-200 text-char-800' },
-  CANCELLED: { text: 'ยกเลิกแล้ว', tone: 'bg-red-50 text-red-700' },
-  EXPIRED: { text: 'หมดอายุ', tone: 'bg-red-50 text-red-700' },
-};
 
 export default async function OrderPage({
   params,
@@ -31,11 +21,6 @@ export default async function OrderPage({
   const order = await getOrderByCode(code, token);
   if (!order) notFound();
 
-  const status = STATUS_LABEL[order.status] ?? {
-    text: order.status,
-    tone: 'bg-char-200 text-char-800',
-  };
-
   const pickupTime = order.pickupAt
     ? new Date(order.pickupAt).toLocaleTimeString('th-TH', {
         hour: '2-digit',
@@ -50,11 +35,9 @@ export default async function OrderPage({
       <header className="bg-leaf-700 px-6 pt-14 pb-12 text-center text-white">
         <p className="text-leaf-100 text-xs tracking-[0.2em] uppercase">รหัสรับสินค้า</p>
         <p className="mt-2 text-5xl font-bold tracking-wider">{order.orderCode}</p>
-        <span
-          className={`mt-5 inline-block rounded-full px-4 py-1.5 text-sm font-semibold ${status.tone}`}
-        >
-          {status.text}
-        </span>
+        <div className="mt-5">
+          <StatusBadge status={order.status} />
+        </div>
       </header>
 
       <section className="-mt-6 px-4">
