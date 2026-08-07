@@ -17,8 +17,8 @@ export function ProductCard({
   return (
     <Link
       href={`/build/${product.id}?store=${storeSlug}`}
-      style={{ animationDelay: `${index * 70}ms` }}
-      className="border-char-200 active:border-leaf-500 wb-rise block rounded-2xl border bg-white p-4 transition-all active:scale-[0.985]"
+      style={{ animationDelay: `${index * 130}ms` }}
+      className="border-char-200 active:border-leaf-500 wb-float-in wb-shine-host wb-card-press block rounded-2xl border bg-white p-4 shadow-[0_1px_2px_rgba(26,26,23,0.04)]"
     >
       <div className="flex items-start justify-between gap-4">
         <div className="min-w-0 flex-1">

@@ -86,13 +86,13 @@ export function BuildClient({ product, storeSlug }: { product: MenuProduct; stor
         ))}
       </div>
 
-      <div className="border-char-200 fixed inset-x-0 bottom-0 border-t bg-white/95 backdrop-blur">
+      <div className="border-char-200 fixed inset-x-0 bottom-0 border-t bg-white/92 shadow-[0_-12px_36px_-18px_rgba(26,26,23,0.28)] backdrop-blur-xl">
         <div className="mx-auto max-w-md px-4 py-4">
           <div className="mb-3 flex items-center justify-between">
             <div className="flex gap-2">
               <span
                 key={`p-${priced.protein}`}
-                className="bg-leaf-50 text-leaf-700 wb-flash rounded-full px-2.5 py-1 text-xs font-semibold"
+                className="bg-leaf-50 text-leaf-700 wb-orbit rounded-full px-2.5 py-1 text-xs font-semibold"
               >
                 โปรตีน <AnimatedNumber value={priced.protein} decimals={1} /> g
               </span>

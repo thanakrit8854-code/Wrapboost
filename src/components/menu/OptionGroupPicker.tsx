@@ -41,7 +41,7 @@ export function OptionGroupPicker({
               className={[
                 'flex w-full items-center justify-between rounded-xl border px-4 py-3 text-left transition-all',
                 isSelected
-                  ? 'border-leaf-500 bg-leaf-50 wb-pop'
+                  ? 'border-leaf-500 bg-leaf-50 wb-pop wb-glow-ring'
                   : 'border-char-200 bg-white active:scale-[0.98]',
                 isBlocked ? 'cursor-not-allowed opacity-40' : '',
               ].join(' ')}
