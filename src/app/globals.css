@@ -14,6 +14,21 @@
   --color-char-800: #2a2a26;
   --color-char-900: #1a1a17;
 
+  --color-sun-50: #fff5ec;
+  --color-sun-100: #ffe6d0;
+  --color-sun-300: #f9b47a;
+  --color-sun-500: #ef8c3f;
+  --color-sun-600: #d97324;
+  --color-sun-700: #b25a17;
+
+  --color-sky-100: #dceefb;
+  --color-sky-300: #8fc7ec;
+  --color-sky-500: #4d9fd6;
+  --color-sky-700: #2b6d99;
+
+  --color-sand-50: #fdfaf5;
+  --color-sand-100: #f6efe4;
+
   --color-amber-cta: #e8873a;
 
   --font-sans:
@@ -22,7 +37,7 @@
 
 html,
 body {
-  background: var(--color-char-50);
+  background: var(--color-sand-50);
   color: var(--color-char-900);
   -webkit-font-smoothing: antialiased;
 }

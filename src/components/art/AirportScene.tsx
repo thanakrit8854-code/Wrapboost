@@ -8,15 +8,16 @@ export function AirportScene() {
       <svg viewBox="0 0 400 176" className="h-full w-full" aria-hidden="true">
         <defs>
           <linearGradient id="wb-sky" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="var(--color-leaf-700)" />
-            <stop offset="100%" stopColor="var(--color-leaf-600)" />
+            <stop offset="0%" stopColor="var(--color-sky-500)" />
+            <stop offset="55%" stopColor="var(--color-sky-300)" />
+            <stop offset="100%" stopColor="var(--color-sun-100)" />
           </linearGradient>
         </defs>
 
         <rect width="400" height="176" fill="url(#wb-sky)" />
 
-        <circle cx="330" cy="40" r="26" className="fill-leaf-500" opacity="0.45" />
-        <circle cx="330" cy="40" r="16" className="fill-leaf-300" opacity="0.5" />
+        <circle cx="330" cy="40" r="26" className="fill-sun-300" opacity="0.5" />
+        <circle cx="330" cy="40" r="16" className="fill-sun-500" opacity="0.7" />
 
         <g className="wb-cloud-a" opacity="0.25">
           <ellipse cx="70" cy="42" rx="30" ry="11" className="fill-white" />
@@ -32,14 +33,14 @@ export function AirportScene() {
         </g>
 
         <g opacity="0.3">
-          <rect x="24" y="104" width="18" height="34" rx="2" className="fill-leaf-300" />
-          <rect x="50" y="94" width="22" height="44" rx="2" className="fill-leaf-300" />
-          <rect x="80" y="112" width="16" height="26" rx="2" className="fill-leaf-300" />
-          <rect x="300" y="98" width="24" height="40" rx="2" className="fill-leaf-300" />
-          <rect x="332" y="110" width="18" height="28" rx="2" className="fill-leaf-300" />
+          <rect x="24" y="104" width="18" height="34" rx="2" className="fill-sky-700" />
+          <rect x="50" y="94" width="22" height="44" rx="2" className="fill-sky-700" />
+          <rect x="80" y="112" width="16" height="26" rx="2" className="fill-sky-700" />
+          <rect x="300" y="98" width="24" height="40" rx="2" className="fill-sky-700" />
+          <rect x="332" y="110" width="18" height="28" rx="2" className="fill-sky-700" />
         </g>
 
-        <rect y="138" width="400" height="38" className="fill-leaf-600" opacity="0.55" />
+        <rect y="138" width="400" height="38" className="fill-sand-100" />
 
         <g className="wb-counter">
           <rect
@@ -51,7 +52,7 @@ export function AirportScene() {
             className="fill-white"
             opacity="0.92"
           />
-          <rect x="150" y="112" width="100" height="8" rx="4" className="fill-leaf-300" />
+          <rect x="150" y="112" width="100" height="8" rx="4" className="fill-sun-500" />
           <rect x="158" y="126" width="26" height="10" rx="2" className="fill-leaf-100" />
           <rect x="190" y="126" width="26" height="10" rx="2" className="fill-leaf-100" />
           <rect x="222" y="126" width="20" height="10" rx="2" className="fill-leaf-100" />

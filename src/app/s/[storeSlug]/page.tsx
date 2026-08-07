@@ -38,7 +38,7 @@ export default async function StoreLandingPage({
         <div className="border-char-200 rounded-2xl border bg-white p-5 shadow-sm">
           <div className="flex items-baseline justify-between">
             <span className="text-char-500 text-sm">เวลาที่ใช้ประกอบ</span>
-            <span className="text-leaf-700 text-2xl font-bold">ต่ำกว่า 3 นาที</span>
+            <span className="text-sun-600 text-2xl font-bold">ต่ำกว่า 3 นาที</span>
           </div>
           <p className="text-char-500 mt-3 text-sm leading-relaxed">
             {isGate
@@ -71,7 +71,7 @@ export default async function StoreLandingPage({
         <Link
           href={`/menu?store=${storeSlug}${channel ? `&c=${channel}` : ''}`}
           role="button"
-          className="bg-leaf-600 active:bg-leaf-700 flex w-full items-center justify-center rounded-xl px-6 py-4 text-base font-semibold text-white transition-colors"
+          className="bg-sun-500 active:bg-sun-600 wb-card-press flex w-full items-center justify-center rounded-xl px-6 py-4 text-base font-semibold text-white shadow-[0_10px_28px_-10px_rgba(239,140,63,0.7)] transition-colors"
         >
           ดูเมนู
         </Link>
