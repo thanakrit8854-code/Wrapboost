@@ -630,3 +630,24 @@ a[role='button'] {
     opacity: 0.7;
   }
 }
+
+/* Food art breathes very slightly so the card never feels like a screenshot. */
+@keyframes wb-art-idle {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-1deg);
+  }
+  50% {
+    transform: translateY(-3px) rotate(1deg);
+  }
+}
+
+.wb-art-idle svg {
+  animation: wb-art-idle 4.2s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wb-art-idle svg {
+    animation: none;
+  }
+}

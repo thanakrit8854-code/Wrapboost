@@ -1,5 +1,6 @@
 import Link from 'next/link';
 
+import { FoodArt } from '@/components/art/FoodArt';
 import { formatTHBPlain } from '@/lib/money';
 import type { MenuProduct } from '@/types/menu';
 
@@ -21,6 +22,9 @@ export function ProductCard({
       className="border-char-200 active:border-leaf-500 wb-float-in wb-shine-host wb-card-press block rounded-2xl border bg-white p-4 shadow-[0_1px_2px_rgba(26,26,23,0.04)]"
     >
       <div className="flex items-start justify-between gap-4">
+        <div className="bg-leaf-50 wb-art-idle flex h-16 w-16 shrink-0 items-center justify-center rounded-xl">
+          <FoodArt kind={product.type} className="h-11 w-11" />
+        </div>
         <div className="min-w-0 flex-1">
           <h3 className="text-char-900 font-semibold">{product.name_th}</h3>
           {product.description_th && (
