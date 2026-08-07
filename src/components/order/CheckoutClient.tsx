@@ -96,7 +96,7 @@ export function CheckoutClient({ storeSlug, channel }: { storeSlug: string; chan
       }
 
       clear();
-      router.push(`/order/${data.orderCode}?t=${data.accessToken}`);
+      router.push(`/pay/${data.orderCode}?t=${data.accessToken}`);
     } catch {
       setError('เชื่อมต่อไม่สำเร็จ ลองอีกครั้ง');
     } finally {
