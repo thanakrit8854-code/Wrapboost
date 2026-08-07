@@ -651,3 +651,68 @@ a[role='button'] {
     animation: none;
   }
 }
+
+/* ── Departure hall scene ────────────────────────────────
+   Slow drift only. A busy sky would compete with the CTA. */
+
+@keyframes wb-cloud-drift {
+  0% {
+    transform: translateX(-14%);
+  }
+  100% {
+    transform: translateX(114%);
+  }
+}
+
+@keyframes wb-plane-cross {
+  0% {
+    transform: translate(-60px, 96px) rotate(-6deg);
+    opacity: 0;
+  }
+  12% {
+    opacity: 0.9;
+  }
+  88% {
+    opacity: 0.9;
+  }
+  100% {
+    transform: translate(430px, 22px) rotate(-6deg);
+    opacity: 0;
+  }
+}
+
+@keyframes wb-scene-hover {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+.wb-cloud-a {
+  animation: wb-cloud-drift 34s linear infinite;
+}
+.wb-cloud-b {
+  animation: wb-cloud-drift 46s linear infinite 6s;
+}
+.wb-plane {
+  animation: wb-plane-cross 15s ease-in-out infinite 1.5s;
+}
+.wb-scene-wrap {
+  animation: wb-scene-hover 3.8s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wb-cloud-a,
+  .wb-cloud-b,
+  .wb-plane,
+  .wb-scene-wrap {
+    animation: none;
+  }
+  .wb-plane {
+    opacity: 0.6;
+    transform: translate(180px, 50px) rotate(-6deg);
+  }
+}

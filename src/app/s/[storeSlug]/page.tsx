@@ -1,3 +1,4 @@
+import { AirportScene } from '@/components/art/AirportScene';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
@@ -28,6 +29,9 @@ export default async function StoreLandingPage({
         <p className="text-leaf-100 mt-2 text-sm">
           แรปสดและเครื่องดื่มฟังก์ชัน สั่งตอนนี้ รับที่เคาน์เตอร์ ไม่ต้องต่อคิว
         </p>
+        <div className="-mx-6 mt-6 -mb-10">
+          <AirportScene />
+        </div>
       </header>
 
       <section className="-mt-6 px-4">
