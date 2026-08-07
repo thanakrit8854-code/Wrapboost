@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation';
 
 import { StatusBadge } from '@/components/order/StatusBadge';
+import { WaitingMascot } from '@/components/order/WaitingMascot';
 import { StatusWatcher } from '@/components/order/StatusWatcher';
 
 import { formatTHBPlain } from '@/lib/money';
@@ -40,7 +41,11 @@ export default async function OrderPage({
         </div>
       </header>
 
-      <section className="-mt-6 px-4">
+      <section className="px-4 pt-6">
+        <WaitingMascot status={order.status} />
+      </section>
+
+      <section className="px-4">
         <div className="border-char-200 rounded-2xl border bg-white p-5">
           <div className="flex items-baseline justify-between">
             <span className="text-char-500 text-sm">เวลารับ</span>

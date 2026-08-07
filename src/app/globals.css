@@ -352,3 +352,204 @@ a[role='button'] {
     transition: none;
   }
 }
+
+/* ── Mascot choreography ─────────────────────────────────
+   One posture per order status. Slow, looping, never urgent:
+   the traveller is waiting, not being hurried. */
+
+@keyframes mascot-sway {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-1.5deg);
+  }
+  50% {
+    transform: translateY(-5px) rotate(1.5deg);
+  }
+}
+
+@keyframes mascot-bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+@keyframes mascot-hop {
+  0%,
+  100% {
+    transform: translateY(0) scaleY(1);
+  }
+  30% {
+    transform: translateY(-16px) scaleY(1.04);
+  }
+  55% {
+    transform: translateY(0) scaleY(0.94);
+  }
+  70% {
+    transform: translateY(-6px) scaleY(1.02);
+  }
+  85% {
+    transform: translateY(0) scaleY(0.98);
+  }
+}
+
+@keyframes mascot-blink {
+  0%,
+  92%,
+  100% {
+    transform: scaleY(1);
+  }
+  95% {
+    transform: scaleY(0.08);
+  }
+}
+
+@keyframes mascot-wave {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  30% {
+    transform: rotate(-16deg);
+  }
+  60% {
+    transform: rotate(10deg);
+  }
+}
+
+@keyframes mascot-stir {
+  0%,
+  100% {
+    transform: rotate(0deg) translateY(0);
+  }
+  25% {
+    transform: rotate(-9deg) translateY(-2px);
+  }
+  50% {
+    transform: rotate(0deg) translateY(2px);
+  }
+  75% {
+    transform: rotate(9deg) translateY(-2px);
+  }
+}
+
+@keyframes mascot-steam {
+  0% {
+    opacity: 0;
+    transform: translateY(6px) scaleY(0.7);
+  }
+  35% {
+    opacity: 0.85;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-22px) scaleY(1.25);
+  }
+}
+
+@keyframes mascot-sparkle {
+  0%,
+  100% {
+    opacity: 0;
+    transform: scale(0.3) rotate(0deg);
+  }
+  40% {
+    opacity: 1;
+    transform: scale(1.15) rotate(20deg);
+  }
+  70% {
+    opacity: 0.6;
+    transform: scale(0.9) rotate(-10deg);
+  }
+}
+
+@keyframes mascot-shadow {
+  0%,
+  100% {
+    transform: scaleX(1);
+    opacity: 0.5;
+  }
+  50% {
+    transform: scaleX(0.94);
+    opacity: 0.38;
+  }
+}
+
+@keyframes mascot-shadow-hop {
+  0%,
+  100% {
+    transform: scaleX(1);
+    opacity: 0.5;
+  }
+  30% {
+    transform: scaleX(0.72);
+    opacity: 0.22;
+  }
+}
+
+.mascot-body {
+  transform-origin: 100px 150px;
+}
+.mascot-waiting {
+  animation: mascot-sway 3.6s ease-in-out infinite;
+}
+.mascot-queued {
+  animation: mascot-bob 2.8s ease-in-out infinite;
+}
+.mascot-cooking {
+  animation: mascot-bob 1.4s ease-in-out infinite;
+}
+.mascot-ready {
+  animation: mascot-hop 2.2s cubic-bezier(0.3, 0, 0.2, 1) infinite;
+}
+
+.mascot-blink {
+  transform-origin: center;
+  animation: mascot-blink 5s ease-in-out infinite;
+}
+.mascot-wave {
+  transform-origin: 132px 96px;
+  animation: mascot-wave 1.8s ease-in-out infinite;
+}
+.mascot-stir {
+  transform-origin: 132px 96px;
+  animation: mascot-stir 0.9s ease-in-out infinite;
+}
+
+.mascot-steam path {
+  animation: mascot-steam 2.6s ease-out infinite;
+}
+.mascot-sparkle path {
+  animation: mascot-sparkle 2.2s ease-in-out infinite;
+}
+
+.mascot-shadow {
+  transform-origin: 100px 158px;
+  animation: mascot-shadow 2.8s ease-in-out infinite;
+}
+.mascot-shadow-hop {
+  transform-origin: 100px 158px;
+  animation: mascot-shadow-hop 2.2s cubic-bezier(0.3, 0, 0.2, 1) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mascot-waiting,
+  .mascot-queued,
+  .mascot-cooking,
+  .mascot-ready,
+  .mascot-blink,
+  .mascot-wave,
+  .mascot-stir,
+  .mascot-shadow,
+  .mascot-shadow-hop {
+    animation: none;
+  }
+  .mascot-steam path,
+  .mascot-sparkle path {
+    animation: none;
+    opacity: 0.6;
+  }
+}
