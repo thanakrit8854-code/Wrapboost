@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
+import { FoodArt } from '@/components/art/FoodArt';
 import { cartTotals, useCart } from '@/lib/cartStore';
 import { formatTHBPlain } from '@/lib/money';
 
@@ -22,11 +23,17 @@ export function CartClient({ storeSlug }: { storeSlug: string }) {
   if (lines.length === 0) {
     return (
       <main className="mx-auto flex min-h-dvh max-w-md flex-col items-center justify-center px-6 text-center">
-        <p className="text-char-500">ยังไม่มีรายการในตะกร้า</p>
+        <div className="bg-sand-100 wb-art-idle mb-6 flex h-32 w-32 items-center justify-center rounded-3xl">
+          <FoodArt kind="WRAP" className="h-20 w-20 opacity-60" />
+        </div>
+        <p className="text-char-900 text-lg font-semibold">ตะกร้ายังว่างอยู่</p>
+        <p className="text-char-500 mt-2 text-sm">
+          เลือกแรปหรือเครื่องดื่มที่ชอบ แล้วมารับตามเวลาที่สะดวก
+        </p>
         <Link
           href={`/menu?store=${storeSlug}`}
           role="button"
-          className="bg-leaf-600 mt-6 rounded-xl px-6 py-3 font-semibold text-white"
+          className="bg-sun-500 active:bg-sun-600 wb-card-press mt-6 rounded-xl px-6 py-3 font-semibold text-white shadow-[0_10px_28px_-10px_rgba(239,140,63,0.6)]"
         >
           กลับไปเลือกเมนู
         </Link>
