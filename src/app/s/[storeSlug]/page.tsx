@@ -1,7 +1,7 @@
-import { AirportScene } from '@/components/art/AirportScene';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
+import { HeroWrap } from '@/components/art/HeroWrap';
 import { getStoreMenu } from '@/server/services/menuService';
 
 export default async function StoreLandingPage({
@@ -20,62 +20,68 @@ export default async function StoreLandingPage({
   const isGate = channel === 'QR_GATE';
 
   return (
-    <main className="mx-auto flex min-h-dvh max-w-md flex-col">
-      <header className="bg-leaf-700 px-6 pt-14 pb-10 text-white">
-        <p className="text-leaf-100 text-xs tracking-[0.2em] uppercase">
+    <main className="relative mx-auto flex min-h-dvh max-w-md flex-col overflow-hidden">
+      {/* warm backdrop */}
+      <div className="wb-landing-bg absolute inset-0 -z-10" />
+
+      <header className="px-6 pt-14 text-center">
+        <p className="text-sun-700 text-[11px] font-semibold tracking-[0.26em] uppercase">
           {menu.store.airport_code} · Domestic Departure
         </p>
-        <h1 className="mt-3 text-3xl leading-tight font-bold">WrapBoost</h1>
-        <p className="text-leaf-100 mt-2 text-sm">
+        <h1 className="text-leaf-700 mt-3 text-[3.25rem] leading-[1.05] font-bold tracking-tight">
+          WrapBoost
+        </h1>
+        <p className="text-char-500 mx-auto mt-3 max-w-[19rem] text-[15px] leading-relaxed">
           แรปสดและเครื่องดื่มฟังก์ชัน สั่งตอนนี้ รับที่เคาน์เตอร์ ไม่ต้องต่อคิว
         </p>
-        <div className="-mx-6 mt-6 -mb-10">
-          <AirportScene />
-        </div>
       </header>
 
-      <section className="-mt-6 px-4">
-        <div className="border-char-200 rounded-2xl border bg-white p-5 shadow-sm">
-          <div className="flex items-baseline justify-between">
-            <span className="text-char-500 text-sm">เวลาที่ใช้ประกอบ</span>
-            <span className="text-sun-600 text-2xl font-bold">ต่ำกว่า 3 นาที</span>
+      <section className="mt-2 flex flex-1 items-center justify-center px-6">
+        <HeroWrap />
+      </section>
+
+      <section className="px-6">
+        <div className="flex items-center justify-center gap-6 rounded-[26px] border border-white/70 bg-white/75 px-5 py-4 shadow-[0_16px_38px_-22px_rgba(45,97,39,0.45)] backdrop-blur-xl">
+          <div className="text-center">
+            <p className="text-sun-600 text-2xl leading-none font-bold whitespace-nowrap">
+              ต่ำกว่า 3 นาที
+            </p>
+            <p className="text-char-500 mt-1.5 text-xs">เวลาประกอบ</p>
           </div>
-          <p className="text-char-500 mt-3 text-sm leading-relaxed">
-            {isGate
-              ? 'สแกนจากประตูขึ้นเครื่อง — เราจะแสดงเฉพาะรายการที่พร้อมรับได้เร็วที่สุด'
-              : 'สั่งตั้งแต่เช็คอิน แล้วเดินมารับที่เคาน์เตอร์ตามเวลาที่เลือกไว้'}
-          </p>
+          <div className="bg-char-200 h-9 w-px" />
+          <div className="text-center">
+            <p className="text-leaf-700 text-2xl leading-none font-bold whitespace-nowrap">
+              150–220฿
+            </p>
+            <p className="text-char-500 mt-1.5 text-xs">ต่อเซ็ตคอมโบ</p>
+          </div>
         </div>
+
+        <ul className="mt-5 space-y-2.5">
+          {[
+            'โปรตีนและแคลอรีบอกครบทุกเมนู',
+            'เครื่องดื่มฟังก์ชันเจ้าเดียวในเทอร์มินัล',
+            isGate
+              ? 'สแกนจากเกต — เลือกเฉพาะที่พร้อมเร็วสุด'
+              : 'สั่งตั้งแต่เช็คอิน เดินมารับตามเวลา',
+          ].map((line) => (
+            <li key={line} className="flex items-start gap-2.5">
+              <span className="bg-leaf-500 mt-[7px] h-1.5 w-1.5 shrink-0 rounded-full" />
+              <span className="text-char-800 text-sm leading-relaxed">{line}</span>
+            </li>
+          ))}
+        </ul>
       </section>
 
-      <section className="mt-8 grid gap-3 px-4">
-        {[
-          { label: 'โปรตีนและแคลอรีบอกครบทุกเมนู', detail: 'ตัดสินใจได้ใน 5 วินาที' },
-          {
-            label: 'เครื่องดื่มฟังก์ชันเจ้าเดียวในเทอร์มินัล',
-            detail: 'เวย์ คอลลาเจน วิตามิน ไฟเบอร์',
-          },
-          { label: 'กินได้มือเดียวที่ประตูขึ้นเครื่อง', detail: 'ไม่ต้องใช้ช้อนส้อม ไม่หก' },
-        ].map((item) => (
-          <div key={item.label} className="flex gap-3">
-            <div className="bg-leaf-500 mt-1.5 h-2 w-2 shrink-0 rounded-full" />
-            <div>
-              <p className="text-char-900 text-sm font-medium">{item.label}</p>
-              <p className="text-char-500 text-sm">{item.detail}</p>
-            </div>
-          </div>
-        ))}
-      </section>
-
-      <div className="mt-auto px-4 pt-10 pb-8">
+      <div className="px-6 pt-7 pb-8">
         <Link
           href={`/menu?store=${storeSlug}${channel ? `&c=${channel}` : ''}`}
           role="button"
-          className="bg-sun-500 active:bg-sun-600 wb-card-press flex w-full items-center justify-center rounded-xl px-6 py-4 text-base font-semibold text-white shadow-[0_10px_28px_-10px_rgba(239,140,63,0.7)] transition-colors"
+          className="bg-sun-500 active:bg-sun-600 wb-card-press flex w-full items-center justify-center rounded-2xl px-6 py-4 text-base font-semibold text-white shadow-[0_14px_32px_-12px_rgba(239,140,63,0.8)] transition-colors"
         >
           ดูเมนู
         </Link>
-        <p className="text-char-500 mt-4 text-center text-xs">
+        <p className="text-char-500 mt-3.5 text-center text-xs">
           {menu.store.terminal_zone ?? 'โถงผู้โดยสารขาออกในประเทศ'}
         </p>
       </div>

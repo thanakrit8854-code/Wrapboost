@@ -1,75 +1,59 @@
 /**
- * A quiet departure-hall scene. Vector, not photography: the counter does not
- * exist yet, and an illustration says that honestly while still filling space.
+ * A glass panel that sits over a soft gradient sky. Rounded, translucent,
+ * and lit from the top-left so it reads as a surface rather than a rectangle.
  */
 export function AirportScene() {
   return (
-    <div className="wb-scene relative h-44 w-full overflow-hidden">
-      <svg viewBox="0 0 400 176" className="h-full w-full" aria-hidden="true">
-        <defs>
-          <linearGradient id="wb-sky" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="var(--color-sky-500)" />
-            <stop offset="55%" stopColor="var(--color-sky-300)" />
-            <stop offset="100%" stopColor="var(--color-sun-100)" />
-          </linearGradient>
-        </defs>
+    <div className="wb-glass-scene relative isolate h-32 w-full overflow-hidden rounded-[28px]">
+      {/* gradient sky behind the glass */}
+      <div className="wb-sky-wash absolute inset-0" />
 
-        <rect width="400" height="176" fill="url(#wb-sky)" />
+      {/* drifting light blobs */}
+      <div className="wb-blob wb-blob-a absolute h-24 w-24 rounded-full" />
+      <div className="wb-blob wb-blob-b absolute h-20 w-20 rounded-full" />
 
-        <circle cx="330" cy="40" r="26" className="fill-sun-300" opacity="0.5" />
-        <circle cx="330" cy="40" r="16" className="fill-sun-500" opacity="0.7" />
+      {/* frosted glass layer */}
+      <div className="absolute inset-0 rounded-[28px] bg-white/18 backdrop-blur-xl" />
 
-        <g className="wb-cloud-a" opacity="0.25">
-          <ellipse cx="70" cy="42" rx="30" ry="11" className="fill-white" />
-          <ellipse cx="92" cy="38" rx="20" ry="13" className="fill-white" />
-        </g>
-        <g className="wb-cloud-b" opacity="0.18">
-          <ellipse cx="250" cy="66" rx="34" ry="10" className="fill-white" />
-          <ellipse cx="272" cy="62" rx="22" ry="12" className="fill-white" />
-        </g>
+      {/* specular highlight along the top edge */}
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/80 to-transparent" />
+      <div className="pointer-events-none absolute inset-0 rounded-[28px] ring-1 ring-white/35 ring-inset" />
 
-        <g className="wb-plane" opacity="0.9">
-          <path d="M0 0l30 9-9 4-6-2-4 7-4-1 2-8-9-3 3-3z" className="fill-white" opacity="0.85" />
-        </g>
-
-        <g opacity="0.3">
-          <rect x="24" y="104" width="18" height="34" rx="2" className="fill-sky-700" />
-          <rect x="50" y="94" width="22" height="44" rx="2" className="fill-sky-700" />
-          <rect x="80" y="112" width="16" height="26" rx="2" className="fill-sky-700" />
-          <rect x="300" y="98" width="24" height="40" rx="2" className="fill-sky-700" />
-          <rect x="332" y="110" width="18" height="28" rx="2" className="fill-sky-700" />
-        </g>
-
-        <rect y="138" width="400" height="38" className="fill-sand-100" />
-
-        <g className="wb-counter">
-          <rect
-            x="150"
-            y="112"
-            width="100"
-            height="30"
-            rx="5"
+      {/* content */}
+      <svg
+        viewBox="0 0 320 128"
+        className="relative h-full w-full"
+        preserveAspectRatio="xMidYMid slice"
+        aria-hidden="true"
+      >
+        <g className="wb-plane" opacity="0.95">
+          <path
+            d="M0 0l26 8-8 3.5-5-1.8-3.5 6-3.5-0.9 1.8-7-8-2.6 2.6-2.6z"
             className="fill-white"
-            opacity="0.92"
           />
-          <rect x="150" y="112" width="100" height="8" rx="4" className="fill-sun-500" />
-          <rect x="158" y="126" width="26" height="10" rx="2" className="fill-leaf-100" />
-          <rect x="190" y="126" width="26" height="10" rx="2" className="fill-leaf-100" />
-          <rect x="222" y="126" width="20" height="10" rx="2" className="fill-leaf-100" />
+        </g>
+
+        <g opacity="0.32">
+          <ellipse cx="70" cy="34" rx="26" ry="9" className="fill-white" />
+          <ellipse cx="88" cy="30" rx="17" ry="11" className="fill-white" />
         </g>
 
         <g className="wb-scene-wrap">
+          <ellipse cx="160" cy="112" rx="26" ry="4" className="fill-char-900" opacity="0.12" />
           <path
-            d="M188 78h24c3 0 5 2 4 5l-4 30c0 3-3 5-6 5h-16c-3 0-6-2-6-5l-4-30c-1-3 1-5 4-5z"
+            d="M146 62h28c3.5 0 6 2.5 5 6l-5 36c-0.5 3.5-3 6-6.5 6h-15c-3.5 0-6-2.5-6.5-6l-5-36c-1-3.5 1.5-6 5-6z"
             className="fill-amber-100"
           />
-          <path d="M187 78c4-5 8-7 13-7s9 2 13 7z" className="fill-leaf-500" />
-          <circle cx="195" cy="90" r="2" className="fill-char-900" />
-          <circle cx="205" cy="90" r="2" className="fill-char-900" />
+          <path d="M145 62c4.5-6 9-8.5 15-8.5s10.5 2.5 15 8.5z" className="fill-leaf-500" />
+          <circle cx="153" cy="58" r="2.6" className="fill-leaf-300" />
+          <circle cx="160" cy="56" r="3" className="fill-red-300" />
+          <circle cx="167" cy="58" r="2.6" className="fill-leaf-300" />
+          <circle cx="154" cy="76" r="2.2" className="fill-char-900" />
+          <circle cx="166" cy="76" r="2.2" className="fill-char-900" />
           <path
-            d="M196 98q4 4 8 0"
+            d="M155 84q5 5 10 0"
             className="stroke-char-900"
-            strokeWidth="2"
+            strokeWidth="2.2"
             strokeLinecap="round"
             fill="none"
           />
