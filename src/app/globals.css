@@ -910,3 +910,20 @@ a[role='button'] {
     radial-gradient(70% 45% at 85% 30%, var(--color-leaf-50) 0%, transparent 65%),
     var(--color-sand-50);
 }
+
+/* Poster sheets: one A4 page each, no browser chrome. */
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 0;
+  }
+
+  html,
+  body {
+    background: #ffffff;
+  }
+
+  .break-after-page {
+    break-after: page;
+  }
+}
